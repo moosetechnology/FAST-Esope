@@ -5,6 +5,17 @@ Class {
 }
 
 { #category : #'entity creation' }
+FASTEsopeExporterVisitorTest >> esopeSegment: segmentName members: aCollection [
+
+	^FASTEsopeSegment new
+		name: segmentName ;
+		members: aCollection ;
+		startPos: 1 ;
+		endPos: (14 + segmentName size) ;
+		yourself
+]
+
+{ #category : #'entity creation' }
 FASTEsopeExporterVisitorTest >> include: filename [
 
 	^FASTEsopeInclude new
@@ -83,5 +94,36 @@ FASTEsopeExporterVisitorTest >> testPointerStatement [
 	self
 		assertExport: stmt
 		equals: '      segini,pt
+'
+]
+
+{ #category : #tests }
+FASTEsopeExporterVisitorTest >> testSegmentEmpty [
+	| stmt |
+	stmt := self esopeSegment: 'pstr' members: #().
+
+	self
+		assertExport: stmt
+		equals: '      segment,pstr
+      end segment
+'
+]
+
+{ #category : #tests }
+FASTEsopeExporterVisitorTest >> testSegmentWithMembers [
+	| stmt |
+	stmt := self
+		esopeSegment: 'pstr'
+		members: {
+			self declarationStatement: (self integerType: nil) variables: #(i j) .
+			self declarationStatement: (self characterType: nil) variables: #(name)
+		}.
+
+	self
+		assertExport: stmt
+		equals: '      segment,pstr
+      integer i,j
+      character name
+      end segment
 '
 ]

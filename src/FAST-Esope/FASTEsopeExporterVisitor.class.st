@@ -46,5 +46,16 @@ FASTEsopeExporterVisitor >> visitFASTEsopePointerType: aFASTEsopePointerType [
 { #category : #visiting }
 FASTEsopeExporterVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
-	^self visitFASTFortranTStatement: aFASTEsopeSegment
+	self
+		sixSpaces ;
+		<< 'segment,' ;
+		<< aFASTEsopeSegment name ;
+		newLine.
+
+	aFASTEsopeSegment members do: [ :each | each accept: self ].
+	
+	self
+		sixSpaces ;
+		<< 'end segment' ;
+		newLine
 ]
