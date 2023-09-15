@@ -36,7 +36,7 @@ FASTEsopeJsonVisitor >> visitDeclarationStatement: aDeclarationStatementNode [
 ]
 
 { #category : #'visiting esope' }
-FASTEsopeJsonVisitor >> visitEsopeEndSegmentComment: anEsopeCommentNode [
+FASTEsopeJsonVisitor >> visitEsopeEndsegmentComment: anEsopeCommentNode [
 	"end of segment declaration (which should be in 'currentSegment).
 	 We update the span of this segment and return it"
 
