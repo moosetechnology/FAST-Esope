@@ -6,8 +6,12 @@ Class {
 
 { #category : #visiting }
 FASTEsopeExporterVisitor >> visitFASTEsopeInclude: aFASTEsopeInclude [
-	<generated>
-	self visitFASTFortranTStatement: aFASTEsopeInclude.
+
+	self
+		<< '#include "' ;
+		<< aFASTEsopeInclude filename ;
+		<< '"' ;
+		newLine
 ]
 
 { #category : #visiting }

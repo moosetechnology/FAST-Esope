@@ -5,6 +5,16 @@ Class {
 }
 
 { #category : #'entity creation' }
+FASTEsopeExporterVisitorTest >> include: filename [
+
+	^FASTEsopeInclude new
+		filename: filename ;
+		startPos: 1 ;
+		endPos: (11+ filename size) ;
+		yourself
+]
+
+{ #category : #'entity creation' }
 FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variable: variableName [
 	"end position is approximate, test should adjust if a real value is needed"
 
@@ -41,6 +51,17 @@ FASTEsopeExporterVisitorTest >> setUp [
 	super setUp.
 
 	visitor := FASTEsopeExporterVisitor new
+]
+
+{ #category : #tests }
+FASTEsopeExporterVisitorTest >> testInclude [
+	| stmt |
+	stmt := self include: 'somefile.inc'.
+
+	self
+		assertExport: stmt
+		equals: '#include "somefile.inc"
+'
 ]
 
 { #category : #tests }
