@@ -24,8 +24,13 @@ FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclaration: aFASTEsopePointerD
 
 { #category : #visiting }
 FASTEsopeExporterVisitor >> visitFASTEsopePointerStatement: aFASTEsopePointerStatement [
-	<generated>
-	self visitFASTFortranTStatement: aFASTEsopePointerStatement.
+
+	self
+		sixSpaces ;
+		<< aFASTEsopePointerStatement command ;
+		<< ',' ;
+		<< aFASTEsopePointerStatement pointerVariable ;
+		newLine
 ]
 
 { #category : #visiting }

@@ -4,7 +4,7 @@ Class {
 	#category : #'FAST-Esope-Tests'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'entity creation' }
 FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variable: variableName [
 	"end position is approximate, test should adjust if a real value is needed"
 
@@ -16,7 +16,19 @@ FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variabl
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'entity creation' }
+FASTEsopeExporterVisitorTest >> pointerStatement: esopeCommand variable: variableName [
+	"end position is approximate, test should adjust if a real value is needed"
+
+	^FASTEsopePointerStatement new
+		command: esopeCommand ;
+		pointerVariable: variableName  ;
+		startPos: 1 ;
+		endPos: (7 + variableName size) ;
+		yourself
+]
+
+{ #category : #'entity creation' }
 FASTEsopeExporterVisitorTest >> pointerType: segmentName [
 
 	^FASTEsopePointerType new
@@ -39,5 +51,16 @@ FASTEsopeExporterVisitorTest >> testPointerDeclaration [
 	self
 		assertExport: stmt
 		equals: '      pointeur pt.pstr
+'
+]
+
+{ #category : #tests }
+FASTEsopeExporterVisitorTest >> testPointerStatement [
+	| stmt |
+	stmt := self pointerStatement: 'segini' variable: 'pt'.
+
+	self
+		assertExport: stmt
+		equals: '      segini,pt
 '
 ]
