@@ -1,91 +1,126 @@
 Class {
-	#name : #FASTEsopeGenerator,
-	#superclass : #FASTMetamodelGenerator,
+	#name : 'FASTEsopeGenerator',
+	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
+		'esopeCommand',
+		'segini',
+		'segadj',
+		'segsup',
+		'segprt',
+		'segact',
+		'segdes',
+		'segcop',
+		'segmov',
+		'abstractStatement',
 		'segment',
-		'pointerDeclaration',
-		'include',
-		'pointerStatement',
-		'declarationStatement',
+		'tDeclaration',
 		'type',
-		'pointerType'
+		'tDeclaredType',
+		'variableDeclarationStatement',
+		'pointeurDeclarationStatement',
+		'variable',
+		'attributeDerefVariable',
+		'binaryExpression',
+		'arrayDimensionExpression'
 	],
-	#category : #'FAST-Esope-Generator'
+	#category : 'FAST-Esope-Generator',
+	#package : 'FAST-Esope-Generator'
 }
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTEsopeGenerator class >> packageName [
 
-	^ #'FAST-Esope-Entities'
+	<ignoreForCoverage>
+	^#'FAST-Esope-Entities'
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTEsopeGenerator class >> prefix [
 
 	^ #FASTEsope
 ]
 
-{ #category : #accessing }
+{ #category : 'accessing' }
 FASTEsopeGenerator class >> submetamodels [
 
-	^ { FASTMetamodelGenerator . FASTFortranGenerator }
+	^ { FASTFortranGenerator }
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FASTEsopeGenerator >> defineClasses [
 
 	super defineClasses.
 
-	declarationStatement := self remoteEntity: #DeclarationStatement withPrefix: #FASTFortran.
-	type := self remoteEntity: #Type withPrefix: #FASTFortran.
+	arrayDimensionExpression := self newClassNamed: #ArrayDimensionExpression comment: 'I represent a slash operator ptr.attr(/1)'.
+	attributeDerefVariable := self newClassNamed: #AttributeDerefVariable comment: 'I represent an attribute in  ptr.attr'.
 
-	segment := builder newClassNamed: #Segment.
-	pointerStatement := builder newClassNamed: #PointerStatement comment: 'Represents any of the 5 Esope statements on pointers: segact, segadj, segdes, segini, segsup'.
-	pointerDeclaration := builder newClassNamed: #PointerDeclaration comment: 'Represents an Esope pointer declaration'.
-	pointerType := builder newClassNamed: #PointerType comment: 'Represents an Esope segment type used in a pointer declaration'.
-	include := builder newClassNamed: #Include comment: 'Represents a #include instruction in an Esope file'.
+	segment := self newClassNamed: #Segment comment: 'comment for segment'.
+
+	esopeCommand := self newClassNamed: #EsopeCommand 
+		comment: 'an abstract class to represent an esopeCommand, segini, segadj, segsup, segprt, segact, segdes, segcop, segmov'.
+	
+	segini := self newClassNamed: #Segini comment: 'segini p1, p2, ..., pN with N=1, 2, 3,...'.
+	segadj := self newClassNamed: #Segadj comment: 'segadj p1, p2, ..., pN with N=1, 2, 3,...'.
+	segsup := self newClassNamed: #Segsup comment: 'segsup p1, p2, ..., pN with N=1, 2, 3,...'.
+	segprt := self newClassNamed: #Segprt comment: 'segprt p1, p2, ..., pN with N=1, 2, 3,...'.
+	segact := self newClassNamed: #Segact comment: 'segact p1, p2, ..., pN with N=1, 2, 3,...'.
+	segdes := self newClassNamed: #Segdes comment: 'segdes p1, p2, ..., pN with N=1, 2, 3,...'.
+	segcop := self newClassNamed: #Segcop comment: 'segini p=q, which will first allocate memory space for p and copy the contents of q into p'.
+	segmov := self newClassNamed: #Segmov comment: 'segact p=q, which copies the contents of q into p, without first allocating memory'.
+
+	pointeurDeclarationStatement := self newClassNamed: #PointeurDeclarationStatement comment: 'pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...'.
+
+	abstractStatement := self remoteEntity: #AbstractStatement withPrefix: #FASTFortran.
+	binaryExpression := self remoteEntity: #BinaryExpression withPrefix: #FASTFortran.
+	type := self remoteEntity: #Type withPrefix: #FASTFortran.
+	variable := self remoteEntity: #Variable withPrefix: #FASTFortran.
+	variableDeclarationStatement := self remoteEntity: #VariableDeclarationStatement withPrefix: #FASTFortran.
+
 ]
 
-{ #category : #definition }
+{ #category : 'definition' }
 FASTEsopeGenerator >> defineHierarchy [
 
-	super defineHierarchy.
+	attributeDerefVariable --|> variable.
+	
+	arrayDimensionExpression --|> binaryExpression.
 
-	pointerStatement --|> tStatement.
-	pointerDeclaration --|> declarationStatement.
-	pointerType --|> type.
-	segment --|> type.
-	segment --|> tStatement.
-	include --|> tStatement 
+	segment --|> #TType.
+	segment --|> #TStatementBlock.
+	segment --|> abstractStatement.
+
+	esopeCommand --|> abstractStatement.
+
+	segini --|> esopeCommand.
+	segadj --|> esopeCommand.
+	segsup --|> esopeCommand.
+	segprt --|> esopeCommand.
+	segact --|> esopeCommand.
+	segdes --|> esopeCommand.
+	segcop --|> esopeCommand.
+	segmov --|> esopeCommand.
+	
+	pointeurDeclarationStatement --|> abstractStatement.
 
 ]
 
-{ #category : #definition }
-FASTEsopeGenerator >> defineProperties [
-
-	super defineProperties.
-
-	(pointerStatement property: #command type: #String)
-		comment: 'One of the five Esope commands: #segact, #segadj, #segdes, #segini, #segsup'.
-	(pointerStatement property: #pointerVariable type: #String)
-		comment: 'Name of the pointer variable acted upon by the command'.
-
-	(pointerType property: #name type: #String)
-		comment: 'Name of a segment used in a pointer declaration'.
-
-	(segment property: #name type: #String)
-		comment: 'The name of the Esope segment'.
-
-	(include property: #filename type: #String)
-		comment: 'name of the file included'.
-]
-
-{ #category : #definition }
-FASTEsopeGenerator >> defineRelations [
-
+{ #category : 'definition' }
+FASTEsopeGenerator >> defineRelations [ 
 	super defineRelations.
 
-	((segment property: #members) comment: 'Variables declarations inside the Esope segment')
-	<>-*
-	((declarationStatement property: #parentSegment) comment: 'Esope segment containing this variable declaration')
+	(attributeDerefVariable property: #pointer) - (variable property: #pointerInParentDeref).
+	(attributeDerefVariable property: #attribute) - (variable property: #attributeInParentDeref).
+
+	esopeCommand -* variable.
+	
+	pointeurDeclarationStatement -* variableDeclarationStatement.
+]
+
+{ #category : 'definition' }
+FASTEsopeGenerator >> defineTraits [
+
+	super defineTraits.
+
+	tDeclaration := self remoteTrait: #TDeclaration withPrefix: #FASTFortran.
+	tDeclaredType := self remoteTrait: #TDeclaredType withPrefix: #FASTFortran.
 ]

@@ -1,13 +1,17 @@
 "
 This trait is used by Famix models.
 It provides an API for creating entities and adding them to the model.
+
+
 "
 Trait {
-	#name : #FASTEsopeTEntityCreator,
-	#category : #'FAST-Esope-Entities-Model'
+	#name : 'FASTEsopeTEntityCreator',
+	#category : 'FAST-Esope-Entities-Model',
+	#package : 'FAST-Esope-Entities',
+	#tag : 'Model'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTEsopeTEntityCreator classSide >> annotation [
 
 	<FMClass: #TEntityCreator super: #Object>
@@ -16,37 +20,100 @@ FASTEsopeTEntityCreator classSide >> annotation [
 	^ self
 ]
 
-{ #category : #'entity creation' }
-FASTEsopeTEntityCreator >> newInclude [
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newArrayDimensionExpression [
 
 	<generated>
-	^ self add: FASTEsopeInclude new
+	^ self add: FASTEsopeArrayDimensionExpression new
 ]
 
-{ #category : #'entity creation' }
-FASTEsopeTEntityCreator >> newPointerDeclaration [
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newAttributeDerefVariable [
 
 	<generated>
-	^ self add: FASTEsopePointerDeclaration new
+	^ self add: FASTEsopeAttributeDerefVariable new
 ]
 
-{ #category : #'entity creation' }
-FASTEsopeTEntityCreator >> newPointerStatement [
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newEsopeCommand [
 
 	<generated>
-	^ self add: FASTEsopePointerStatement new
+	^ self add: FASTEsopeEsopeCommand new
 ]
 
-{ #category : #'entity creation' }
-FASTEsopeTEntityCreator >> newPointerType [
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newPointeurDeclarationStatement [
 
 	<generated>
-	^ self add: FASTEsopePointerType new
+	^ self add: FASTEsopePointeurDeclarationStatement new
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegact [
+
+	<generated>
+	^ self add: FASTEsopeSegact new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegadj [
+
+	<generated>
+	^ self add: FASTEsopeSegadj new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegcop [
+
+	<generated>
+	^ self add: FASTEsopeSegcop new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegdes [
+
+	<generated>
+	^ self add: FASTEsopeSegdes new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegini [
+
+	<generated>
+	^ self add: FASTEsopeSegini new
+]
+
+{ #category : 'entity creation' }
 FASTEsopeTEntityCreator >> newSegment [
 
 	<generated>
 	^ self add: FASTEsopeSegment new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegmentNamed: aName [
+
+	<generated>
+	^ self add: (FASTEsopeSegment named: aName)
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegmov [
+
+	<generated>
+	^ self add: FASTEsopeSegmov new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegprt [
+
+	<generated>
+	^ self add: FASTEsopeSegprt new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegsup [
+
+	<generated>
+	^ self add: FASTEsopeSegsup new
 ]
