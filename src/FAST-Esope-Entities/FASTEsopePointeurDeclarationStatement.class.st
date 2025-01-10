@@ -4,6 +4,11 @@ pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...
 ## Relations
 ======================
 
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `fortranDeclarationOwner` | `FASTFortranTDeclaration` | `declarations` | `FASTFortranTWithDeclarations` | The element that declares me|
+
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
@@ -15,6 +20,8 @@ pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...
 Class {
 	#name : 'FASTEsopePointeurDeclarationStatement',
 	#superclass : 'FASTFortranAbstractStatement',
+	#traits : 'FASTFortranTDeclaration',
+	#classTraits : 'FASTFortranTDeclaration classTrait',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'

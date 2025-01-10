@@ -87,6 +87,7 @@ FASTEsopeGenerator >> defineHierarchy [
 
 	segment --|> #TType.
 	segment --|> #TStatementBlock.
+	segment --|> tDeclaration.
 	segment --|> abstractStatement.
 
 	esopeCommand --|> abstractStatement.
@@ -101,6 +102,7 @@ FASTEsopeGenerator >> defineHierarchy [
 	segmov --|> esopeCommand.
 	
 	pointeurDeclarationStatement --|> abstractStatement.
+	pointeurDeclarationStatement --|> tDeclaration.
 
 ]
 

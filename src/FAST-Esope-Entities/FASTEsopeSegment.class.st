@@ -8,6 +8,7 @@ comment for segment
 | Relation | Origin | Opposite | Type | Comment |
 |---|
 | `fastBehaviouralParent` | `FASTTStatementBlock` | `statementBlock` | `FASTTBehaviouralEntity` | Behavioural entity containing the statement block.|
+| `fortranDeclarationOwner` | `FASTFortranTDeclaration` | `declarations` | `FASTFortranTWithDeclarations` | The element that declares me|
 | `statementContainer` | `FASTTStatement` | `statements` | `FASTTStatementBlock` | Block containing this statement.|
 | `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
 
@@ -19,7 +20,7 @@ comment for segment
 ### Incoming dependencies
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `incomingReferences` | `FamixTReferenceable` | `referredType` | `FamixTReference` | References to this entity by other entities.|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
 
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
@@ -42,8 +43,8 @@ comment for segment
 Class {
 	#name : 'FASTEsopeSegment',
 	#superclass : 'FASTFortranAbstractStatement',
-	#traits : 'FASTTStatementBlock + FamixTType',
-	#classTraits : 'FASTTStatementBlock classTrait + FamixTType classTrait',
+	#traits : 'FASTFortranTDeclaration + FASTTStatementBlock + FamixTType',
+	#classTraits : 'FASTFortranTDeclaration classTrait + FASTTStatementBlock classTrait + FamixTType classTrait',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
