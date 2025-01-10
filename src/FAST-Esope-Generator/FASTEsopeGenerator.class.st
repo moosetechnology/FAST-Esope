@@ -19,7 +19,6 @@ Class {
 		'variableDeclarationStatement',
 		'pointeurDeclarationStatement',
 		'variable',
-		'attributeDerefVariable',
 		'binaryExpression',
 		'arrayDimensionExpression'
 	],
@@ -52,7 +51,9 @@ FASTEsopeGenerator >> defineClasses [
 	super defineClasses.
 
 	arrayDimensionExpression := self newClassNamed: #ArrayDimensionExpression comment: 'I represent a slash operator ptr.attr(/1)'.
-	attributeDerefVariable := self newClassNamed: #AttributeDerefVariable comment: 'I represent an attribute in  ptr.attr'.
+	
+	"already exists in FASTFortran as FASTFortranFieldAccess
+	attributeDerefVariable := self newClassNamed: #AttributeDerefVariable comment: 'I represent an attribute in  ptr.attr'."
 
 	segment := self newClassNamed: #Segment comment: 'comment for segment'.
 
@@ -81,8 +82,6 @@ FASTEsopeGenerator >> defineClasses [
 { #category : 'definition' }
 FASTEsopeGenerator >> defineHierarchy [
 
-	attributeDerefVariable --|> variable.
-	
 	arrayDimensionExpression --|> binaryExpression.
 
 	segment --|> #TType.
@@ -109,9 +108,6 @@ FASTEsopeGenerator >> defineHierarchy [
 { #category : 'definition' }
 FASTEsopeGenerator >> defineRelations [ 
 	super defineRelations.
-
-	(attributeDerefVariable property: #pointer) - (variable property: #pointerInParentDeref).
-	(attributeDerefVariable property: #attribute) - (variable property: #attributeInParentDeref).
 
 	esopeCommand -* variable.
 	
