@@ -1,16 +1,17 @@
 Class {
-	#name : #FASTEsopeJsonVisitorTests,
-	#superclass : #AbstractJsonToFASTTests,
-	#category : #'FAST-Esope-Tests'
+	#name : 'FASTEsopeJsonVisitorTests',
+	#superclass : 'AbstractJsonToFASTTests',
+	#category : 'FAST-Esope-Tests',
+	#package : 'FAST-Esope-Tests'
 }
 
-{ #category : #running }
+{ #category : 'running' }
 FASTEsopeJsonVisitorTests >> jsonVisitor [
 
 		^FASTEsopeJsonVisitor 
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeJsonVisitorTests >> testIncludeInstruction [
 	
 	| result stmt |
@@ -22,13 +23,13 @@ C@_#include "file.inc"
 	result := self visitJsonCode.
 
 	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopeInclude.	
+	self assert: stmt class equals: FASTEsopeCppIncludeStatement.	
 	self assert: stmt filename equals: 'file.inc'.
 	self assert: stmt startPos equals: 26.
 	self assert: stmt endPos equals: 43.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeJsonVisitorTests >> testPointerDeclaration [
 	
 	| result stmt |
@@ -40,15 +41,15 @@ C@_     pointeur pt.pstr
 	result := self visitJsonCode.
 
 	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopePointerDeclaration.	
-	self assert: stmt type name equals: 'pstr'.
+	self assert: stmt class equals: FASTEsopePointeurDeclarationStatement.	
+	self assert: stmt declaredType name equals: 'pstr'.
 	self assert: stmt declarators size equals: 1.
 	self assert: stmt declarators anyOne name equals: 'pt'.
 	self assert: stmt startPos equals: 30.
 	self assert: stmt endPos equals: 44.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeJsonVisitorTests >> testSegactCommand [
 	
 	| result stmt |
@@ -60,72 +61,15 @@ C@_     segact,pt
 	result := self visitJsonCode.
 
 	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopePointerStatement.	
-	self assert: stmt command equals: 'segact'.
-	self assert: stmt pointerVariable equals: 'pt'.
+	self assert: stmt class equals: FASTEsopeSegact.	
+	self assert: stmt variables size  equals: 1.
+	self assert: stmt variables first name  equals: 'pt'.
 	self assert: stmt startPos equals: 30.
 	self assert: stmt endPos equals: 38.
 
 ]
 
-{ #category : #tests }
-FASTEsopeJsonVisitorTests >> testSegadjCommand [
-	
-	| result stmt |
-	fortranCode := '      PROGRAM MYPROG
-C@_     segadj,pt
-      END
-'.
-	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"fortran77.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_     segadj,pt","span":"(2:1)-(2:17)","tag":"comment"}],"name":"myprog","span":"(1:7)-(3:9)","subprograms":null,"tag":"main"}]}'.
-	result := self visitJsonCode.
-
-	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopePointerStatement.	
-	self assert: stmt command equals: 'segadj'.
-	self assert: stmt pointerVariable equals: 'pt'.
-	self assert: stmt startPos equals: 30.
-	self assert: stmt endPos equals: 38.
-]
-
-{ #category : #tests }
-FASTEsopeJsonVisitorTests >> testSegdesCommand [
-	
-	| result stmt |
-	fortranCode := '      PROGRAM MYPROG
-C@_     segdes,pt
-      END
-'.
-	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"fortran77.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_     segdes,pt","span":"(2:1)-(2:17)","tag":"comment"}],"name":"myprog","span":"(1:7)-(3:9)","subprograms":null,"tag":"main"}]}'.
-	result := self visitJsonCode.
-
-	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopePointerStatement.	
-	self assert: stmt command equals: 'segdes'.
-	self assert: stmt pointerVariable equals: 'pt'.
-	self assert: stmt startPos equals: 30.
-	self assert: stmt endPos equals: 38.
-]
-
-{ #category : #tests }
-FASTEsopeJsonVisitorTests >> testSeginiCommand [
-	
-	| result stmt |
-	fortranCode := '      PROGRAM MYPROG
-C@_     segini,pt
-      END
-'.
-	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"fortran77.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_     segini,pt","span":"(2:1)-(2:17)","tag":"comment"}],"name":"myprog","span":"(1:7)-(3:9)","subprograms":null,"tag":"main"}]}'.
-	result := self visitJsonCode.
-
-	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopePointerStatement.	
-	self assert: stmt command equals: 'segini'.
-	self assert: stmt pointerVariable equals: 'pt'.
-	self assert: stmt startPos equals: 30.
-	self assert: stmt endPos equals: 38.
-]
-
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeJsonVisitorTests >> testSegmentEmpty [
 	
 	| result stmt |
@@ -134,7 +78,7 @@ c@_   segment,user
 c@_   end segment
       END
 '.
-	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"FastTmp/tmpFASTSource.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_   segment,user","span":"(2:1)-(2:18)","tag":"comment"},{"anno":[],"comment":"@_   end segment","span":"(3:1)-(3:17)","tag":"comment"}],"name":"myprog","span":"(1:7)-(4:9)","subprograms":null,"tag":"main"}]}'.
+	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"/Users/sow/Documents/Pharo/images/FAST-Esope-fix/srcCode.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_   segment,user","span":"(2:1)-(2:18)","tag":"comment"},{"anno":[],"comment":"@_   end segment","span":"(3:1)-(3:17)","tag":"comment"}],"name":"myprog","span":"(1:7)-(4:9)","subprograms":null,"tag":"main"}]}'.
 	result := self visitJsonCode.
 
 	stmt := result first statementBlock statements first.
@@ -145,7 +89,7 @@ c@_   end segment
 	self assert: stmt endPos equals: 57.
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeJsonVisitorTests >> testSegmentWithMembers [
 	
 	| result stmt member |
@@ -176,23 +120,4 @@ c@_   end segment
 	self assert: member declarators second name equals: 'age'.
 
 
-]
-
-{ #category : #tests }
-FASTEsopeJsonVisitorTests >> testSegsupCommand [
-	
-	| result stmt |
-	fortranCode := '      PROGRAM MYPROG
-C@_     segsup,pt
-      END
-'.
-	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"fortran77.f"},"program_units":[{"anno":[],"blocks":[{"anno":[],"comment":"@_     segsup,pt","span":"(2:1)-(2:17)","tag":"comment"}],"name":"myprog","span":"(1:7)-(3:9)","subprograms":null,"tag":"main"}]}'.
-	result := self visitJsonCode.
-
-	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopePointerStatement.	
-	self assert: stmt command equals: 'segsup'.
-	self assert: stmt pointerVariable equals: 'pt'.
-	self assert: stmt startPos equals: 30.
-	self assert: stmt endPos equals: 38.
 ]

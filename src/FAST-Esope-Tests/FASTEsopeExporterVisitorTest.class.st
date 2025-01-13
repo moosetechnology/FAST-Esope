@@ -1,55 +1,59 @@
 Class {
-	#name : #FASTEsopeExporterVisitorTest,
-	#superclass : #FASTFortranExporterVisitorTest,
-	#category : #'FAST-Esope-Tests'
+	#name : 'FASTEsopeExporterVisitorTest',
+	#superclass : 'FASTFortranExporterVisitorTest',
+	#category : 'FAST-Esope-Tests',
+	#package : 'FAST-Esope-Tests'
 }
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
+FASTEsopeExporterVisitorTest >> esopeCommandStatement: esopeCommandClass variable: variableName [
+	"end position is approximate, test should adjust if a real value is needed"
+
+	^esopeCommandClass new
+		variables: { self scalarVariable: variableName } ;
+		startPos: 1 ;
+		endPos: (7 + variableName size) ;
+		yourself
+]
+
+{ #category : 'entity creation' }
 FASTEsopeExporterVisitorTest >> esopeSegment: segmentName members: aCollection [
 
 	^FASTEsopeSegment new
 		name: segmentName ;
-		members: aCollection ;
+		statements: aCollection ;
 		startPos: 1 ;
 		endPos: (14 + segmentName size) ;
 		yourself
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FASTEsopeExporterVisitorTest >> include: filename [
 
-	^FASTEsopeInclude new
+	^FASTEsopeCppIncludeStatement new
 		filename: filename ;
 		startPos: 1 ;
 		endPos: (11+ filename size) ;
 		yourself
 ]
 
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variable: variableName [
 	"end position is approximate, test should adjust if a real value is needed"
 
-	^FASTEsopePointerDeclaration new
-		type: (self pointerType: segmentName) ;
-		declarators: { self scalarVariable: variableName }  ;
+	^FASTEsopePointeurDeclarationStatement new
+		addVariableDeclarationStatement: (
+			FASTFortranVariableDeclarationStatement new
+				declaredType: (self pointerType: segmentName) ;
+				declarators: { self variableDeclarator: variableName }
+				yourself
+		) ;
 		startPos: 1 ;
 		endPos: (9 + segmentName size + variableName size) ;
 		yourself
 ]
 
-{ #category : #'entity creation' }
-FASTEsopeExporterVisitorTest >> pointerStatement: esopeCommand variable: variableName [
-	"end position is approximate, test should adjust if a real value is needed"
-
-	^FASTEsopePointerStatement new
-		command: esopeCommand ;
-		pointerVariable: variableName  ;
-		startPos: 1 ;
-		endPos: (7 + variableName size) ;
-		yourself
-]
-
-{ #category : #'entity creation' }
+{ #category : 'entity creation' }
 FASTEsopeExporterVisitorTest >> pointerType: segmentName [
 
 	^FASTEsopePointerType new
@@ -57,14 +61,14 @@ FASTEsopeExporterVisitorTest >> pointerType: segmentName [
 		yourself
 ]
 
-{ #category : #running }
+{ #category : 'running' }
 FASTEsopeExporterVisitorTest >> setUp [
 	super setUp.
 
 	visitor := FASTEsopeExporterVisitor new
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeExporterVisitorTest >> testInclude [
 	| stmt |
 	stmt := self include: 'somefile.inc'.
@@ -75,7 +79,18 @@ FASTEsopeExporterVisitorTest >> testInclude [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
+FASTEsopeExporterVisitorTest >> testIncludeStatement [
+	| stmt |
+	stmt := self include: 'somefile.inc'.
+
+	self
+		assertExport: stmt
+		equals: '#include "somefile.inc"
+'
+]
+
+{ #category : 'tests' }
 FASTEsopeExporterVisitorTest >> testPointerDeclaration [
 	| stmt |
 	stmt := self pointerDeclarationStatement: 'pstr' variable: 'pt'.
@@ -86,10 +101,10 @@ FASTEsopeExporterVisitorTest >> testPointerDeclaration [
 '
 ]
 
-{ #category : #tests }
-FASTEsopeExporterVisitorTest >> testPointerStatement [
+{ #category : 'tests' }
+FASTEsopeExporterVisitorTest >> testSeginiStatement [
 	| stmt |
-	stmt := self pointerStatement: 'segini' variable: 'pt'.
+	stmt := self esopeCommandStatement: FASTEsopeSegini variable: 'pt'.
 
 	self
 		assertExport: stmt
@@ -97,7 +112,7 @@ FASTEsopeExporterVisitorTest >> testPointerStatement [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeExporterVisitorTest >> testSegmentEmpty [
 	| stmt |
 	stmt := self esopeSegment: 'pstr' members: #().
@@ -109,7 +124,7 @@ FASTEsopeExporterVisitorTest >> testSegmentEmpty [
 '
 ]
 
-{ #category : #tests }
+{ #category : 'tests' }
 FASTEsopeExporterVisitorTest >> testSegmentWithMembers [
 	| stmt |
 	stmt := self

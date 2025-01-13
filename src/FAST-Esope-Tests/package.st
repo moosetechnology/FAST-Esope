@@ -1,1 +1,1 @@
-Package { #name : #'FAST-Esope-Tests' }
+Package { #name : 'FAST-Esope-Tests' }
