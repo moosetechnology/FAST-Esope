@@ -117,9 +117,9 @@ FASTEsopeJsonVisitor >> visitEsopePointeurComment: anEsopePointerNode [
 		do: [ :each | | typeAndVarName |
 			typeAndVarName := each splitOn: '.'.
 			pointeur 
-				addVariableDeclarationStatement: (model newVariableDeclarationStatement 
-					declaredType: (model newPointedTypeNamed: typeAndVarName second); 
-					addDeclarator: (model newVariableDeclarator name: typeAndVarName first);
+				addPointerDeclarator: (model newPointerDeclarator 
+					pointedTypeName: typeAndVarName second ; 
+					variableDeclarator: (model newVariableDeclarator name: typeAndVarName first);
 					yourself
 				)
 		].

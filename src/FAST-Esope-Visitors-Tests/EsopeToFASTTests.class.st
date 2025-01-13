@@ -94,15 +94,19 @@ c@_   pointeur pt.seg1, q.seg2
 	cmd := result first statementBlock statements first.
 	self assert: cmd class equals: FASTEsopePointerDeclarationStatement.
 
-	self assert: cmd variableDeclarationStatements size equals: 1.
+	self assert: cmd pointerDeclarators size equals: 2.
 
-	varDecl := cmd variableDeclarationStatements first.
+	varDecl := cmd pointerDeclarators first.
 
-	self assert: varDecl declaredType class equals: FASTEsopePointedType.
-	self assert: varDecl declaredType name equals: 'seg1'.
-	self assert: varDecl declarators size equals: 1.
-	self assert: varDecl declarators first class equals: FASTFortranVariableDeclarator.
-	self assert: varDecl declarators first name equals: 'ptr1'.
+	self assert: varDecl pointedTypeName equals: 'seg1'.
+	self assert: varDecl variableDeclarator class equals: FASTFortranVariableDeclarator.
+	self assert: varDecl variableDeclarator name equals: 'pt'.
+
+	varDecl := cmd pointerDeclarators second.
+
+	self assert: varDecl pointedTypeName equals: 'seg2'.
+	self assert: varDecl variableDeclarator class equals: FASTFortranVariableDeclarator.
+	self assert: varDecl variableDeclarator name equals: 'q'.
 ]
 
 { #category : 'tests-expression' }
@@ -123,15 +127,14 @@ c@_   pointeur ptr1.seg1
 	self assert: cmd startPos equals: 30.
 	self assert: cmd endPos equals: 47.
 
-	self assert: cmd variableDeclarationStatements size equals: 1.
+	self assert: cmd pointerDeclarators size equals: 1.
 
-	varDecl := cmd variableDeclarationStatements first.
+	varDecl := cmd pointerDeclarators first.
 
-	self assert: varDecl declaredType class equals: FASTEsopePointedType.
-	self assert: varDecl declaredType name equals: 'seg1'.
-	self assert: varDecl declarators size equals: 1.
-	self assert: varDecl declarators first class equals: FASTFortranVariableDeclarator.
-	self assert: varDecl declarators first name equals: 'ptr1'.
+	self assert: varDecl pointedTypeName equals: 'seg1'.
+	self assert: varDecl variableDeclarator class equals: FASTFortranVariableDeclarator.
+	self assert: varDecl variableDeclarator name equals: 'ptr1'.
+
 ]
 
 { #category : 'tests-expression' }
