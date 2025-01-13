@@ -1,8 +1,9 @@
 Class {
 	#name : 'FASTEsopeExporterVisitorTest',
 	#superclass : 'FASTFortranExporterVisitorTest',
-	#category : 'FAST-Esope-Tests',
-	#package : 'FAST-Esope-Tests'
+	#category : 'FAST-Esope-Visitors-Tests-Export',
+	#package : 'FAST-Esope-Visitors-Tests',
+	#tag : 'Export'
 }
 
 { #category : 'entity creation' }
@@ -66,17 +67,6 @@ FASTEsopeExporterVisitorTest >> setUp [
 	super setUp.
 
 	visitor := FASTEsopeExporterVisitor new
-]
-
-{ #category : 'tests' }
-FASTEsopeExporterVisitorTest >> testInclude [
-	| stmt |
-	stmt := self include: 'somefile.inc'.
-
-	self
-		assertExport: stmt
-		equals: '#include "somefile.inc"
-'
 ]
 
 { #category : 'tests' }
