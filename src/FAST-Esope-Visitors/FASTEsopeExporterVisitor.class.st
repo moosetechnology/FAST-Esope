@@ -17,33 +17,23 @@ FASTEsopeExporterVisitor >> visitFASTEsopeCppIncludeStatement: aFASTEsopeCppIncl
 ]
 
 { #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopePointedType: aFASTEsopePointedType [ 
-
-	self
-		<< '.' ;
-		<< aFASTEsopePointedType name
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclaration: aFASTEsopePointerDeclaration [
-
-	self
-		sixSpaces ;
-		<< 'pointeur '.
-	aFASTEsopePointerDeclaration declarators first accept: self.
-	self << '.'.
-	aFASTEsopePointerDeclaration type accept: self.
-	self newLine
-]
-
-{ #category : 'visiting' }
 FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclarationStatement: aFASTEsopePointerDeclaration [
 
 	self
 		sixSpaces ;
 		<< 'pointeur '.
-	aFASTEsopePointerDeclaration variableDeclarationStatements first accept: self.
+		
+	self visitNodeListSeparatedByCommas:	aFASTEsopePointerDeclaration pointerDeclarators.
 	self newLine
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclarator: aFASTEsopePointerDeclarator [
+
+	aFASTEsopePointerDeclarator variableDeclarator accept: self.
+	self
+		<< '.' ;
+		<< aFASTEsopePointerDeclarator pointedTypeName
 ]
 
 { #category : 'visiting' }
@@ -64,6 +54,48 @@ FASTEsopeExporterVisitor >> visitFASTEsopePointerType: aFASTEsopePointerType [
 ]
 
 { #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSeg: aFASTEsopeSegCommand command: commandName [
+
+	self
+		sixSpaces ;
+		<< commandName ;
+		<< ',' ;
+		visitNodeListSeparatedByCommas: aFASTEsopeSegCommand variables ;
+		newLine
+		
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegact: aFASTEsopeSegact [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegact command: 'segact'
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegadj: aFASTEsopeSegadj [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegadj command: 'segadj'
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegcop: aFASTEsopeSegcop [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegcop command: 'segcop'
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegdes: aFASTEsopeSegdes [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegdes command: 'segdes'
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegini: aFASTEsopeSegini [ 
+
+	self visitFASTEsopeSeg: aFASTEsopeSegini command: 'segini'
+]
+
+{ #category : 'visiting' }
 FASTEsopeExporterVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
 	self
@@ -72,10 +104,28 @@ FASTEsopeExporterVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 		<< aFASTEsopeSegment name ;
 		newLine.
 
-	aFASTEsopeSegment members do: [ :each | each accept: self ].
+	aFASTEsopeSegment statements do: [ :each | each accept: self ].
 	
 	self
 		sixSpaces ;
 		<< 'end segment' ;
 		newLine
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegmov: aFASTEsopeSegmov [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegmov command: 'segmov'
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegprt: aFASTEsopeSegprt [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegprt command: 'segprt'
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopeSegsup: aFASTEsopeSegsup [
+
+	self visitFASTEsopeSeg: aFASTEsopeSegsup command: 'segsup'
 ]

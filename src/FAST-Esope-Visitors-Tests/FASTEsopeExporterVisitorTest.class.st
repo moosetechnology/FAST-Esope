@@ -43,22 +43,14 @@ FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variabl
 	"end position is approximate, test should adjust if a real value is needed"
 
 	^FASTEsopePointerDeclarationStatement new
-		addVariableDeclarationStatement: (
-			FASTFortranVariableDeclarationStatement new
-				declaredType: (self pointerType: segmentName) ;
-				declarators: { self variableDeclarator: variableName }
+		addPointerDeclarator: (
+			FASTEsopePointerDeclarator new
+				pointedTypeName: segmentName ;
+				variableDeclarator: (self variableDeclarator: variableName) ;
 				yourself
 		) ;
 		startPos: 1 ;
 		endPos: (9 + segmentName size + variableName size) ;
-		yourself
-]
-
-{ #category : 'entity creation' }
-FASTEsopeExporterVisitorTest >> pointerType: segmentName [
-
-	^FASTEsopePointedType new
-		name: segmentName ;
 		yourself
 ]
 
