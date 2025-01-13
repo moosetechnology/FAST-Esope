@@ -7,13 +7,21 @@ Class {
 }
 
 { #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeInclude: aFASTEsopeInclude [
+FASTEsopeExporterVisitor >> visitFASTEsopeCppIncludeStatement: aFASTEsopeCppIncludeStatement [ 
 
 	self
 		<< '#include "' ;
-		<< aFASTEsopeInclude filename ;
+		<< aFASTEsopeCppIncludeStatement filename ;
 		<< '"' ;
 		newLine
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopePointedType: aFASTEsopePointedType [ 
+
+	self
+		<< '.' ;
+		<< aFASTEsopePointedType name
 ]
 
 { #category : 'visiting' }
@@ -25,6 +33,16 @@ FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclaration: aFASTEsopePointerD
 	aFASTEsopePointerDeclaration declarators first accept: self.
 	self << '.'.
 	aFASTEsopePointerDeclaration type accept: self.
+	self newLine
+]
+
+{ #category : 'visiting' }
+FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclarationStatement: aFASTEsopePointerDeclaration [
+
+	self
+		sixSpaces ;
+		<< 'pointeur '.
+	aFASTEsopePointerDeclaration variableDeclarationStatements first accept: self.
 	self newLine
 ]
 

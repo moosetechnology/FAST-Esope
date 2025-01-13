@@ -1,9 +1,9 @@
 Class {
 	#name : 'EsopeToFASTTests',
 	#superclass : 'AbstractJsonToFASTTests',
-	#category : 'FAST-Esope-Visitors-Tests-Visitor',
+	#category : 'FAST-Esope-Visitors-Tests-Import',
 	#package : 'FAST-Esope-Visitors-Tests',
-	#tag : 'Visitor'
+	#tag : 'Import'
 }
 
 { #category : 'running' }
