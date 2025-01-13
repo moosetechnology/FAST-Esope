@@ -28,10 +28,10 @@ FASTEsopeTEntityCreator >> newArrayDimensionExpression [
 ]
 
 { #category : 'entity creation' }
-FASTEsopeTEntityCreator >> newAttributeDerefVariable [
+FASTEsopeTEntityCreator >> newCppIncludeStatement [
 
 	<generated>
-	^ self add: FASTEsopeAttributeDerefVariable new
+	^ self add: FASTEsopeCppIncludeStatement new
 ]
 
 { #category : 'entity creation' }
@@ -42,10 +42,24 @@ FASTEsopeTEntityCreator >> newEsopeCommand [
 ]
 
 { #category : 'entity creation' }
-FASTEsopeTEntityCreator >> newPointeurDeclarationStatement [
+FASTEsopeTEntityCreator >> newPointedType [
 
 	<generated>
-	^ self add: FASTEsopePointeurDeclarationStatement new
+	^ self add: FASTEsopePointedType new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newPointedTypeNamed: aName [
+
+	<generated>
+	^ self add: (FASTEsopePointedType named: aName)
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newPointerDeclarationStatement [
+
+	<generated>
+	^ self add: FASTEsopePointerDeclarationStatement new
 ]
 
 { #category : 'entity creation' }

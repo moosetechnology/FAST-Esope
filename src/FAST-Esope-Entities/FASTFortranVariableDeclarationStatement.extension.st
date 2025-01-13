@@ -1,18 +1,18 @@
 Extension { #name : 'FASTFortranVariableDeclarationStatement' }
 
 { #category : '*FAST-Esope-Entities-accessing' }
-FASTFortranVariableDeclarationStatement >> pointeurDeclarationStatement [
-	"Relation named: #pointeurDeclarationStatement type: #FASTEsopePointeurDeclarationStatement opposite: #variableDeclarationStatements"
+FASTFortranVariableDeclarationStatement >> pointerDeclarationStatement [
+	"Relation named: #pointerDeclarationStatement type: #FASTEsopePointerDeclarationStatement opposite: #variableDeclarationStatements"
 
 	<generated>
-	<FMProperty: #pointeurDeclarationStatement type: #FASTEsopePointeurDeclarationStatement opposite: #variableDeclarationStatements>
+	<FMProperty: #pointerDeclarationStatement type: #FASTEsopePointerDeclarationStatement opposite: #variableDeclarationStatements>
 	<package: #'FAST-Esope-Entities'>
-	^ self attributeAt: #pointeurDeclarationStatement ifAbsent: [ nil ]
+	^ self attributeAt: #pointerDeclarationStatement ifAbsent: [ nil ]
 ]
 
 { #category : '*FAST-Esope-Entities-accessing' }
-FASTFortranVariableDeclarationStatement >> pointeurDeclarationStatement: anObject [
+FASTFortranVariableDeclarationStatement >> pointerDeclarationStatement: anObject [
 
 	<generated>
-	self attributeAt: #pointeurDeclarationStatement put: (FMMultivalueLink on: self update: #variableDeclarationStatements from: self pointeurDeclarationStatement to: anObject).
+	self attributeAt: #pointerDeclarationStatement put: (FMMultivalueLink on: self update: #variableDeclarationStatements from: self pointerDeclarationStatement to: anObject).
 ]
