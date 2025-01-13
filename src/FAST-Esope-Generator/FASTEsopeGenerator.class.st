@@ -17,12 +17,12 @@ Class {
 		'type',
 		'tDeclaredType',
 		'variableDeclarationStatement',
-		'pointeurDeclarationStatement',
 		'variable',
 		'binaryExpression',
 		'arrayDimensionExpression',
-		'pointerType',
-		'cppIncludeStatement'
+		'cppIncludeStatement',
+		'pointedType',
+		'pointerDeclarationStatement'
 	],
 	#category : 'FAST-Esope-Generator',
 	#package : 'FAST-Esope-Generator'
@@ -73,9 +73,9 @@ FASTEsopeGenerator >> defineClasses [
 	segcop := self newClassNamed: #Segcop comment: 'segini p=q, which will first allocate memory space for p and copy the contents of q into p'.
 	segmov := self newClassNamed: #Segmov comment: 'segact p=q, which copies the contents of q into p, without first allocating memory'.
 
-	pointeurDeclarationStatement := self newClassNamed: #PointeurDeclarationStatement comment: 'pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...'.
+	pointerDeclarationStatement := self newClassNamed: #PointerDeclarationStatement comment: 'pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...'.
 	
-	pointerType := self newClassNamed: #PointerType comment: 'I represent a segment type in pointeur declaration. Im SEG in `Pointeur p.SEG`'.
+	pointedType := self newClassNamed: #PointedType comment: 'I represent a segment type in a pointeur declaration. Ex: SEG in `Pointeur p.SEG`'.
 
 	abstractStatement := self remoteEntity: #AbstractStatement withPrefix: #FASTFortran.
 	binaryExpression := self remoteEntity: #BinaryExpression withPrefix: #FASTFortran.
@@ -97,8 +97,8 @@ FASTEsopeGenerator >> defineHierarchy [
 	
 	cppIncludeStatement --|> abstractStatement.
 	
-	pointerType --|> #TType.
-	pointerType --|> type.
+	pointedType --|> #TType.
+	pointedType --|> type.
 
 	esopeCommand --|> abstractStatement.
 
@@ -111,8 +111,8 @@ FASTEsopeGenerator >> defineHierarchy [
 	segcop --|> esopeCommand.
 	segmov --|> esopeCommand.
 	
-	pointeurDeclarationStatement --|> abstractStatement.
-	pointeurDeclarationStatement --|> tDeclaration.
+	pointerDeclarationStatement --|> abstractStatement.
+	pointerDeclarationStatement --|> tDeclaration.
 
 ]
 
@@ -131,7 +131,7 @@ FASTEsopeGenerator >> defineRelations [
 
 	esopeCommand -* variable.
 	
-	pointeurDeclarationStatement -* variableDeclarationStatement.
+	pointerDeclarationStatement -* variableDeclarationStatement.
 ]
 
 { #category : 'definition' }
