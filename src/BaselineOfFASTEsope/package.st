@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfFASTEsope }
+Package { #name : 'BaselineOfFASTEsope' }

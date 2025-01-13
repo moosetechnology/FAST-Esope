@@ -1,15 +1,12 @@
-"
-any entity
-"
 Class {
-	#name : #FASTEsopeEntity,
-	#superclass : #MooseEntity,
-	#traits : 'FASTEsopeTEntity',
-	#classTraits : 'FASTEsopeTEntity classTrait',
-	#category : #'FAST-Esope-Entities-Entities'
+	#name : 'FASTEsopeEntity',
+	#superclass : 'MooseEntity',
+	#category : 'FAST-Esope-Entities-Entities',
+	#package : 'FAST-Esope-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTEsopeEntity class >> annotation [
 
 	<FMClass: #Entity super: #MooseEntity>
@@ -19,22 +16,43 @@ FASTEsopeEntity class >> annotation [
 	^ self
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
 FASTEsopeEntity class >> isAbstract [
 
 	<generated>
 	^ self == FASTEsopeEntity
 ]
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTEsopeEntity class >> metamodel [
 
 	<generated>
 	^ FASTEsopeModel metamodel
 ]
 
-{ #category : #testing }
+{ #category : 'testing' }
+FASTEsopeEntity >> isQueryable [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
 FASTEsopeEntity >> isStatement [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTEsopeEntity >> isStatementBlock [
+
+	<generated>
+	^ false
+]
+
+{ #category : 'testing' }
+FASTEsopeEntity >> isType [
 
 	<generated>
 	^ false

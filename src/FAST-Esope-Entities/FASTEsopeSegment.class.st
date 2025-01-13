@@ -1,65 +1,60 @@
+"
+comment for segment
+
+## Relations
+======================
+
+### Parents
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `fastBehaviouralParent` | `FASTTStatementBlock` | `statementBlock` | `FASTTBehaviouralEntity` | Behavioural entity containing the statement block.|
+| `fortranDeclarationOwner` | `FASTFortranTDeclaration` | `declarations` | `FASTFortranTWithDeclarations` | The element that declares me|
+| `statementContainer` | `FASTTStatement` | `statements` | `FASTTStatementBlock` | Block containing this statement.|
+| `typeContainer` | `FamixTType` | `types` | `FamixTWithTypes` | Container entity to which this type belongs. Container is a namespace, not a package (Smalltalk).|
+
+### Children
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `statements` | `FASTTStatementBlock` | `statementContainer` | `FASTTStatement` | Statements enclosed in this block|
+
+### Incoming dependencies
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `incomingReferences` | `FamixTReferenceable` | `referredEntity` | `FamixTReference` | References to this entity by other entities.|
+
+### Other
+| Relation | Origin | Opposite | Type | Comment |
+|---|
+| `sourceAnchor` | `FamixTSourceEntity` | `element` | `FamixTSourceAnchor` | SourceAnchor entity linking to the original source code for this entity|
+| `typedEntities` | `FamixTType` | `declaredType` | `FamixTTypedEntity` | Entities that have this type as declaredType|
+
+
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `isStub` | `Boolean` | false | Flag true if the entity attributes are incomplete, either because the entity is missing or not imported.|
+| `name` | `String` | nil | Basic name of the entity, not full reference.|
+| `startPos` | `Number` | nil | |
+
+"
 Class {
-	#name : #FASTEsopeSegment,
-	#superclass : #FASTFortranType,
-	#traits : 'FASTEsopeTStatement',
-	#classTraits : 'FASTEsopeTStatement classTrait',
-	#instVars : [
-		'#name => FMProperty'
-	],
-	#category : #'FAST-Esope-Entities-Entities'
+	#name : 'FASTEsopeSegment',
+	#superclass : 'FASTFortranAbstractStatement',
+	#traits : 'FASTFortranTDeclaration + FASTTStatementBlock + FamixTType',
+	#classTraits : 'FASTFortranTDeclaration classTrait + FASTTStatementBlock classTrait + FamixTType classTrait',
+	#category : 'FAST-Esope-Entities-Entities',
+	#package : 'FAST-Esope-Entities',
+	#tag : 'Entities'
 }
 
-{ #category : #meta }
+{ #category : 'meta' }
 FASTEsopeSegment class >> annotation [
 
-	<FMClass: #Segment super: #FASTFortranType>
+	<FMClass: #Segment super: #FASTFortranAbstractStatement>
 	<package: #'FAST-Esope-Entities'>
 	<generated>
 	^ self
-]
-
-{ #category : #adding }
-FASTEsopeSegment >> addMember: anObject [
-	<generated>
-	^ self members add: anObject
-]
-
-{ #category : #accessing }
-FASTEsopeSegment >> members [
-	"Relation named: #members type: #FASTFortranDeclarationStatement opposite: #parentSegment"
-
-	<generated>
-	<FMComment: 'Variables declarations inside the Esope segment'>
-	<derived>
-	<FMProperty: #members type: #FASTFortranDeclarationStatement opposite: #parentSegment>
-	^ self attributeAt: #members ifAbsentPut: [ FMMultivalueLink on: self opposite: #parentSegment: ]
-]
-
-{ #category : #accessing }
-FASTEsopeSegment >> members: anObject [
-
-	<generated>
-	self members value: anObject
-]
-
-{ #category : #navigation }
-FASTEsopeSegment >> membersGroup [
-	<generated>
-	<navigation: 'Members'>
-	^ MooseSpecializedGroup withAll: self members asSet
-]
-
-{ #category : #accessing }
-FASTEsopeSegment >> name [
-
-	<FMProperty: #name type: #String>
-	<generated>
-	<FMComment: 'The name of the Esope segment'>
-	^ name
-]
-
-{ #category : #accessing }
-FASTEsopeSegment >> name: anObject [
-	<generated>
-	name := anObject
 ]
