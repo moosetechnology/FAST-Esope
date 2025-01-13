@@ -41,7 +41,7 @@ FASTEsopeExporterVisitorTest >> include: filename [
 FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variable: variableName [
 	"end position is approximate, test should adjust if a real value is needed"
 
-	^FASTEsopePointeurDeclarationStatement new
+	^FASTEsopePointerDeclarationStatement new
 		addVariableDeclarationStatement: (
 			FASTFortranVariableDeclarationStatement new
 				declaredType: (self pointerType: segmentName) ;
@@ -56,7 +56,7 @@ FASTEsopeExporterVisitorTest >> pointerDeclarationStatement: segmentName variabl
 { #category : 'entity creation' }
 FASTEsopeExporterVisitorTest >> pointerType: segmentName [
 
-	^FASTEsopePointerType new
+	^FASTEsopePointedType new
 		name: segmentName ;
 		yourself
 ]
