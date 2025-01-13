@@ -20,7 +20,8 @@ Class {
 		'pointeurDeclarationStatement',
 		'variable',
 		'binaryExpression',
-		'arrayDimensionExpression'
+		'arrayDimensionExpression',
+		'pointerType'
 	],
 	#category : 'FAST-Esope-Generator',
 	#package : 'FAST-Esope-Generator'
@@ -70,6 +71,8 @@ FASTEsopeGenerator >> defineClasses [
 	segmov := self newClassNamed: #Segmov comment: 'segact p=q, which copies the contents of q into p, without first allocating memory'.
 
 	pointeurDeclarationStatement := self newClassNamed: #PointeurDeclarationStatement comment: 'pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...'.
+	
+	pointerType := self newClassNamed: #PointerType comment: 'I represent a segment type in pointeur declaration. Im SEG in `Pointeur p.SEG`'.
 
 	abstractStatement := self remoteEntity: #AbstractStatement withPrefix: #FASTFortran.
 	binaryExpression := self remoteEntity: #BinaryExpression withPrefix: #FASTFortran.
@@ -88,6 +91,9 @@ FASTEsopeGenerator >> defineHierarchy [
 	segment --|> #TStatementBlock.
 	segment --|> tDeclaration.
 	segment --|> abstractStatement.
+	
+	pointerType --|> #TType.
+	pointerType --|> type.
 
 	esopeCommand --|> abstractStatement.
 
