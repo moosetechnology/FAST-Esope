@@ -2,7 +2,6 @@ Class {
 	#name : 'FASTEsopeGenerator',
 	#superclass : 'FamixMetamodelGenerator',
 	#instVars : [
-		'esopeCommand',
 		'segini',
 		'segadj',
 		'segsup',
@@ -14,15 +13,14 @@ Class {
 		'abstractStatement',
 		'segment',
 		'tDeclaration',
-		'type',
-		'tDeclaredType',
-		'variableDeclarationStatement',
 		'variable',
 		'binaryExpression',
 		'arrayDimensionExpression',
 		'cppIncludeStatement',
-		'pointedType',
-		'pointerDeclarationStatement'
+		'pointerDeclarationStatement',
+		'pointerDeclarator',
+		'variableDeclarator',
+		'segCommand'
 	],
 	#category : 'FAST-Esope-Generator',
 	#package : 'FAST-Esope-Generator'
@@ -61,8 +59,8 @@ FASTEsopeGenerator >> defineClasses [
 
 	segment := self newClassNamed: #Segment comment: 'comment for segment'.
 
-	esopeCommand := self newClassNamed: #EsopeCommand 
-		comment: 'an abstract class to represent an esopeCommand, segini, segadj, segsup, segprt, segact, segdes, segcop, segmov'.
+	segCommand := self newClassNamed: #SegCommand 
+		comment: 'an abstract class to represent an esopeCommand: segini, segadj, segsup, segprt, segact, segdes, segcop, segmov'.
 	
 	segini := self newClassNamed: #Segini comment: 'segini p1, p2, ..., pN with N=1, 2, 3,...'.
 	segadj := self newClassNamed: #Segadj comment: 'segadj p1, p2, ..., pN with N=1, 2, 3,...'.
@@ -74,15 +72,12 @@ FASTEsopeGenerator >> defineClasses [
 	segmov := self newClassNamed: #Segmov comment: 'segact p=q, which copies the contents of q into p, without first allocating memory'.
 
 	pointerDeclarationStatement := self newClassNamed: #PointerDeclarationStatement comment: 'pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...'.
-	
-	pointedType := self newClassNamed: #PointedType comment: 'I represent a segment type in a pointeur declaration. Ex: SEG in `Pointeur p.SEG`'.
+	pointerDeclarator := self newClassNamed: #PointerDeclarator comment: 'A declarator for one "pointeur" and its segment type in a PointerDeclarationStatement'.
 
 	abstractStatement := self remoteEntity: #AbstractStatement withPrefix: #FASTFortran.
 	binaryExpression := self remoteEntity: #BinaryExpression withPrefix: #FASTFortran.
-	type := self remoteEntity: #Type withPrefix: #FASTFortran.
 	variable := self remoteEntity: #Variable withPrefix: #FASTFortran.
-	variableDeclarationStatement := self remoteEntity: #VariableDeclarationStatement withPrefix: #FASTFortran.
-
+	variableDeclarator  := self remoteEntity: #VariableDeclarator withPrefix: #FASTFortran.
 ]
 
 { #category : 'definition' }
@@ -96,20 +91,17 @@ FASTEsopeGenerator >> defineHierarchy [
 	segment --|> abstractStatement.
 	
 	cppIncludeStatement --|> abstractStatement.
-	
-	pointedType --|> #TType.
-	pointedType --|> type.
 
-	esopeCommand --|> abstractStatement.
+	segCommand --|> abstractStatement.
 
-	segini --|> esopeCommand.
-	segadj --|> esopeCommand.
-	segsup --|> esopeCommand.
-	segprt --|> esopeCommand.
-	segact --|> esopeCommand.
-	segdes --|> esopeCommand.
-	segcop --|> esopeCommand.
-	segmov --|> esopeCommand.
+	segini --|> segCommand.
+	segadj --|> segCommand.
+	segsup --|> segCommand.
+	segprt --|> segCommand.
+	segact --|> segCommand.
+	segdes --|> segCommand.
+	segcop --|> segCommand.
+	segmov --|> segCommand.
 	
 	pointerDeclarationStatement --|> abstractStatement.
 	pointerDeclarationStatement --|> tDeclaration.
@@ -123,15 +115,18 @@ FASTEsopeGenerator >> defineProperties [
 
 	(cppIncludeStatement property: #filename type: #String)
 		comment: 'name of the file included'.
+
+	pointerDeclarator property: #pointedTypeName type: #String.
 ]
 
 { #category : 'definition' }
 FASTEsopeGenerator >> defineRelations [ 
 	super defineRelations.
 
-	esopeCommand -* variable.
+	segCommand -* variable.
 	
-	pointerDeclarationStatement -* variableDeclarationStatement.
+	pointerDeclarationStatement -* pointerDeclarator.
+	pointerDeclarator - variableDeclarator 
 ]
 
 { #category : 'definition' }
@@ -140,5 +135,4 @@ FASTEsopeGenerator >> defineTraits [
 	super defineTraits.
 
 	tDeclaration := self remoteTrait: #TDeclaration withPrefix: #FASTFortran.
-	tDeclaredType := self remoteTrait: #TDeclaredType withPrefix: #FASTFortran.
 ]

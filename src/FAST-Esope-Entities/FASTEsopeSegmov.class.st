@@ -5,7 +5,7 @@ segact p=q, which copies the contents of q into p, without first allocating memo
 "
 Class {
 	#name : 'FASTEsopeSegmov',
-	#superclass : 'FASTEsopeEsopeCommand',
+	#superclass : 'FASTEsopeSegCommand',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
@@ -14,7 +14,7 @@ Class {
 { #category : 'meta' }
 FASTEsopeSegmov class >> annotation [
 
-	<FMClass: #Segmov super: #FASTEsopeEsopeCommand>
+	<FMClass: #Segmov super: #FASTEsopeSegCommand>
 	<package: #'FAST-Esope-Entities'>
 	<generated>
 	^ self

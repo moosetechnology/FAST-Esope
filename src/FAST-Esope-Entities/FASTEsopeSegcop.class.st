@@ -5,7 +5,7 @@ segini p=q, which will first allocate memory space for p and copy the contents o
 "
 Class {
 	#name : 'FASTEsopeSegcop',
-	#superclass : 'FASTEsopeEsopeCommand',
+	#superclass : 'FASTEsopeSegCommand',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
@@ -14,7 +14,7 @@ Class {
 { #category : 'meta' }
 FASTEsopeSegcop class >> annotation [
 
-	<FMClass: #Segcop super: #FASTEsopeEsopeCommand>
+	<FMClass: #Segcop super: #FASTEsopeSegCommand>
 	<package: #'FAST-Esope-Entities'>
 	<generated>
 	^ self

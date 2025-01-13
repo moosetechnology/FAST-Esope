@@ -35,31 +35,24 @@ FASTEsopeTEntityCreator >> newCppIncludeStatement [
 ]
 
 { #category : 'entity creation' }
-FASTEsopeTEntityCreator >> newEsopeCommand [
-
-	<generated>
-	^ self add: FASTEsopeEsopeCommand new
-]
-
-{ #category : 'entity creation' }
-FASTEsopeTEntityCreator >> newPointedType [
-
-	<generated>
-	^ self add: FASTEsopePointedType new
-]
-
-{ #category : 'entity creation' }
-FASTEsopeTEntityCreator >> newPointedTypeNamed: aName [
-
-	<generated>
-	^ self add: (FASTEsopePointedType named: aName)
-]
-
-{ #category : 'entity creation' }
 FASTEsopeTEntityCreator >> newPointerDeclarationStatement [
 
 	<generated>
 	^ self add: FASTEsopePointerDeclarationStatement new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newPointerDeclarator [
+
+	<generated>
+	^ self add: FASTEsopePointerDeclarator new
+]
+
+{ #category : 'entity creation' }
+FASTEsopeTEntityCreator >> newSegCommand [
+
+	<generated>
+	^ self add: FASTEsopeSegCommand new
 ]
 
 { #category : 'entity creation' }

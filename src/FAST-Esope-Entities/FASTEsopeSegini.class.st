@@ -5,7 +5,7 @@ segini p1, p2, ..., pN with N=1, 2, 3,...
 "
 Class {
 	#name : 'FASTEsopeSegini',
-	#superclass : 'FASTEsopeEsopeCommand',
+	#superclass : 'FASTEsopeSegCommand',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
@@ -14,7 +14,7 @@ Class {
 { #category : 'meta' }
 FASTEsopeSegini class >> annotation [
 
-	<FMClass: #Segini super: #FASTEsopeEsopeCommand>
+	<FMClass: #Segini super: #FASTEsopeSegCommand>
 	<package: #'FAST-Esope-Entities'>
 	<generated>
 	^ self

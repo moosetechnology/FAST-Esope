@@ -12,7 +12,7 @@ pointeur p1.SEG, p2.OTHER_SEG, ..., pN.SEG with N=1, 2, 3,...
 ### Other
 | Relation | Origin | Opposite | Type | Comment |
 |---|
-| `variableDeclarationStatements` | `FASTEsopePointerDeclarationStatement` | `pointerDeclarationStatement` | `FASTFortranVariableDeclarationStatement` | |
+| `pointerDeclarators` | `FASTEsopePointerDeclarationStatement` | `pointerDeclarationStatement` | `FASTEsopePointerDeclarator` | |
 
 
 
@@ -22,6 +22,9 @@ Class {
 	#superclass : 'FASTFortranAbstractStatement',
 	#traits : 'FASTFortranTDeclaration',
 	#classTraits : 'FASTFortranTDeclaration classTrait',
+	#instVars : [
+		'#pointerDeclarators => FMMany type: #FASTEsopePointerDeclarator opposite: #pointerDeclarationStatement'
+	],
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
@@ -37,24 +40,23 @@ FASTEsopePointerDeclarationStatement class >> annotation [
 ]
 
 { #category : 'adding' }
-FASTEsopePointerDeclarationStatement >> addVariableDeclarationStatement: anObject [
+FASTEsopePointerDeclarationStatement >> addPointerDeclarator: anObject [
 	<generated>
-	^ self variableDeclarationStatements add: anObject
+	^ self pointerDeclarators add: anObject
 ]
 
 { #category : 'accessing' }
-FASTEsopePointerDeclarationStatement >> variableDeclarationStatements [
-	"Relation named: #variableDeclarationStatements type: #FASTFortranVariableDeclarationStatement opposite: #pointerDeclarationStatement"
+FASTEsopePointerDeclarationStatement >> pointerDeclarators [
+	"Relation named: #pointerDeclarators type: #FASTEsopePointerDeclarator opposite: #pointerDeclarationStatement"
 
 	<generated>
 	<derived>
-	<FMProperty: #variableDeclarationStatements type: #FASTFortranVariableDeclarationStatement opposite: #pointerDeclarationStatement>
-	^ self attributeAt: #variableDeclarationStatements ifAbsentPut: [ FMMultivalueLink on: self opposite: #pointerDeclarationStatement: ]
+	^ pointerDeclarators
 ]
 
 { #category : 'accessing' }
-FASTEsopePointerDeclarationStatement >> variableDeclarationStatements: anObject [
+FASTEsopePointerDeclarationStatement >> pointerDeclarators: anObject [
 
 	<generated>
-	self variableDeclarationStatements value: anObject
+	pointerDeclarators value: anObject
 ]

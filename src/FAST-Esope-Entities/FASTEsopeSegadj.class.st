@@ -5,7 +5,7 @@ segadj p1, p2, ..., pN with N=1, 2, 3,...
 "
 Class {
 	#name : 'FASTEsopeSegadj',
-	#superclass : 'FASTEsopeEsopeCommand',
+	#superclass : 'FASTEsopeSegCommand',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
@@ -14,7 +14,7 @@ Class {
 { #category : 'meta' }
 FASTEsopeSegadj class >> annotation [
 
-	<FMClass: #Segadj super: #FASTEsopeEsopeCommand>
+	<FMClass: #Segadj super: #FASTEsopeSegCommand>
 	<package: #'FAST-Esope-Entities'>
 	<generated>
 	^ self
