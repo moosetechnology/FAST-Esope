@@ -1,10 +1,11 @@
 Class {
-	#name : #BaselineOfFASTEsope,
-	#superclass : #BaselineOf,
-	#category : #BaselineOfFASTEsope
+	#name : 'BaselineOfFASTEsope',
+	#superclass : 'BaselineOf',
+	#category : 'BaselineOfFASTEsope',
+	#package : 'BaselineOfFASTEsope'
 }
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTEsope >> baseline: spec [
 
 	<baseline>
@@ -14,7 +15,7 @@ BaselineOfFASTEsope >> baseline: spec [
 		self defineDependencies: spec ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTEsope >> defineDependencies: spec [
 
 	spec baseline: 'FASTFortran' with: [
@@ -23,13 +24,15 @@ BaselineOfFASTEsope >> defineDependencies: spec [
 			repository: 'github://moosetechnology/FAST-Fortran' ]
 ]
 
-{ #category : #baselines }
+{ #category : 'baselines' }
 BaselineOfFASTEsope >> definePackages: spec [
 
 	spec
 		repository: 'github://moosetechnology/FAST-Esope';
 		package: 'FAST-Esope' with: [ spec requires: #(FASTFortran 'FAST-Esope-Entities') ] ;
 		package: 'FAST-Esope-Tests' with: [ spec requires: #('FAST-Esope') ] ;
+		package: 'FAST-Esope-Visitors' with: [ spec requires: #('FAST-Esope-Entities') ] ;
+		package: 'FAST-Esope-Visitors-Tests' with: [ spec requires: #('FAST-Esope-Visitors') ] ;
 		package: 'FAST-Esope-Entities' with: [ spec requires: #(FASTFortran) ] ;
 		package: 'FAST-Esope-Generator' with: [ spec requires: #(FASTFortran) ]
 ]
