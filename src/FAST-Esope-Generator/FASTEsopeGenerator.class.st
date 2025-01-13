@@ -21,7 +21,8 @@ Class {
 		'variable',
 		'binaryExpression',
 		'arrayDimensionExpression',
-		'pointerType'
+		'pointerType',
+		'cppIncludeStatement'
 	],
 	#category : 'FAST-Esope-Generator',
 	#package : 'FAST-Esope-Generator'
@@ -55,6 +56,8 @@ FASTEsopeGenerator >> defineClasses [
 	
 	"already exists in FASTFortran as FASTFortranFieldAccess
 	attributeDerefVariable := self newClassNamed: #AttributeDerefVariable comment: 'I represent an attribute in  ptr.attr'."
+	
+	cppIncludeStatement := builder newClassNamed: #CppIncludeStatement comment: 'Represents a #include instruction in an E or F file'.
 
 	segment := self newClassNamed: #Segment comment: 'comment for segment'.
 
@@ -92,6 +95,8 @@ FASTEsopeGenerator >> defineHierarchy [
 	segment --|> tDeclaration.
 	segment --|> abstractStatement.
 	
+	cppIncludeStatement --|> abstractStatement.
+	
 	pointerType --|> #TType.
 	pointerType --|> type.
 
@@ -109,6 +114,15 @@ FASTEsopeGenerator >> defineHierarchy [
 	pointeurDeclarationStatement --|> abstractStatement.
 	pointeurDeclarationStatement --|> tDeclaration.
 
+]
+
+{ #category : 'definition' }
+FASTEsopeGenerator >> defineProperties [ 
+
+	super defineProperties.
+
+	(cppIncludeStatement property: #filename type: #String)
+		comment: 'name of the file included'.
 ]
 
 { #category : 'definition' }
