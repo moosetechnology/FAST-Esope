@@ -57,26 +57,6 @@ C comment in a function''s body
 ]
 
 { #category : 'tests-expression' }
-EsopeToFASTTests >> testIncludeStatement [
-	| cmd result |
-	
-	fortranCode := '      subroutine hello
-c@_#include "file.inc"
-      end
-'.
-
-	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"/Users/sow/Documents/Pharo/images/FAST-Esope-fix/srcCode.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":"@_#include \"file.inc\"","span":"(2:1)-(2:22)","tag":"comment"}],"name":"hello","options":[null,null],"span":"(1:7)-(3:9)","subprograms":null,"tag":"subroutine"}]}'.
-
-	result := self visitJsonCode.
-
-	cmd := result first statementBlock statements first.
-	self assert: cmd class equals: FASTEsopeCppIncludeStatement.
-	self assert: cmd filename equals: 'file.inc'.
-	self assert: cmd startPos equals: 28.
-	self assert: cmd endPos equals: 45.
-]
-
-{ #category : 'tests-expression' }
 EsopeToFASTTests >> testPointerMultipleDeclarations [
 	| cmd result varDecl |
 	

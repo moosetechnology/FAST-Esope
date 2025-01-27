@@ -31,7 +31,7 @@ FASTEsopeExporterVisitorTest >> esopeSegment: segmentName members: aCollection [
 { #category : 'entity creation' }
 FASTEsopeExporterVisitorTest >> include: filename [
 
-	^FASTEsopeCppIncludeStatement new
+	^FASTEsopeIncludeStatement new
 		filename: filename ;
 		startPos: 1 ;
 		endPos: (11+ filename size) ;
@@ -68,7 +68,7 @@ FASTEsopeExporterVisitorTest >> testIncludeStatement [
 
 	self
 		assertExport: stmt
-		equals: '#include "somefile.inc"
+		equals: '%inc "somefile.inc"
 '
 ]
 
