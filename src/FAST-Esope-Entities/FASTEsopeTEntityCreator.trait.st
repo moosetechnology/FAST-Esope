@@ -28,10 +28,10 @@ FASTEsopeTEntityCreator >> newArrayDimensionExpression [
 ]
 
 { #category : 'entity creation' }
-FASTEsopeTEntityCreator >> newCppIncludeStatement [
+FASTEsopeTEntityCreator >> newIncludeStatement [
 
 	<generated>
-	^ self add: FASTEsopeCppIncludeStatement new
+	^ self add: FASTEsopeIncludeStatement new
 ]
 
 { #category : 'entity creation' }

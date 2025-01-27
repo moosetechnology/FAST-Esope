@@ -1,5 +1,5 @@
 "
-Represents a #include instruction in an E or F file
+Represents a '%inc' instruction in an Esope file
 
 ## Properties
 ======================
@@ -10,7 +10,7 @@ Represents a #include instruction in an E or F file
 
 "
 Class {
-	#name : 'FASTEsopeCppIncludeStatement',
+	#name : 'FASTEsopeIncludeStatement',
 	#superclass : 'FASTFortranAbstractStatement',
 	#instVars : [
 		'#filename => FMProperty'
@@ -21,16 +21,16 @@ Class {
 }
 
 { #category : 'meta' }
-FASTEsopeCppIncludeStatement class >> annotation [
+FASTEsopeIncludeStatement class >> annotation [
 
-	<FMClass: #CppIncludeStatement super: #FASTFortranAbstractStatement>
+	<FMClass: #IncludeStatement super: #FASTFortranAbstractStatement>
 	<package: #'FAST-Esope-Entities'>
 	<generated>
 	^ self
 ]
 
 { #category : 'accessing' }
-FASTEsopeCppIncludeStatement >> filename [
+FASTEsopeIncludeStatement >> filename [
 
 	<FMProperty: #filename type: #String>
 	<generated>
@@ -39,7 +39,7 @@ FASTEsopeCppIncludeStatement >> filename [
 ]
 
 { #category : 'accessing' }
-FASTEsopeCppIncludeStatement >> filename: anObject [
+FASTEsopeIncludeStatement >> filename: anObject [
 	<generated>
 	filename := anObject
 ]
