@@ -7,11 +7,11 @@ Class {
 }
 
 { #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeCppIncludeStatement: aFASTEsopeCppIncludeStatement [ 
+FASTEsopeExporterVisitor >> visitFASTEsopeIncludeStatement: aFASTEsopeIncludeStatement [ 
 
 	self
-		<< '#include "' ;
-		<< aFASTEsopeCppIncludeStatement filename ;
+		<< '%inc "' ;
+		<< aFASTEsopeIncludeStatement filename ;
 		<< '"' ;
 		newLine
 ]
