@@ -11,8 +11,9 @@ BaselineOfFASTEsope >> baseline: spec [
 	<baseline>
 	spec for: #common do: [
 		spec description: 'Developement version of FAST Esope'.
-		self definePackages: spec.
+		spec repository: 'github://moosetechnology/FAST-Esope'.
 		self defineDependencies: spec.
+		self definePackages: spec.
 		self defineGroups: spec ]
 ]
 
