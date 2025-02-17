@@ -267,9 +267,8 @@ c@_   end segment
 	self assert: declaration class equals: FASTFortranVariableDeclarationStatement.
 	
 	self assert: declaration declaredType class equals: FASTFortranIntegerType.
-	
-	
 	self assert: declaration declarators size equals: 1.
+
 	declarator := declaration declarators anyOne.
 	self assert: declarator class equals: FASTFortranVariableDeclarator.
 	self assert: declarator name equals: 'bar'
