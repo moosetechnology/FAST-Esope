@@ -101,7 +101,7 @@ FASTEsopeJsonVisitor >> visitEsopeIncludeComment: anEsopeIncludeCommentNode [
 	| data |
 	data := self processEsopeComment: anEsopeIncludeCommentNode.
 	
-	^(self newEntity: FASTEsopeCppIncludeStatement atPosition: data second)
+	^(self newEntity: FASTEsopeIncludeStatement atPosition: data second)
 		filename: data fourth
 ]
 
