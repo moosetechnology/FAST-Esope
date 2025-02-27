@@ -136,6 +136,25 @@ c@_   segact, lb
 	self assert: cmd variables first name equals: 'lb'.
 ]
 
+{ #category : 'tests-expression' }
+EsopeToFASTTests >> testSegactCommandWithNOMOD [
+	| cmd result |
+	fortranCode := '      subroutine hello
+c@_   segact, lb*NOMOD
+      end
+'.
+
+	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"./srcCodeOrigin.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":"@_   segact, lb*NOMOD","span":"(2:1)-(2:22)","tag":"comment"}],"name":"hello","options":[null,null],"span":"(1:7)-(3:9)","subprograms":null,"tag":"subroutine"}]}'.
+
+	result := self visitJsonCode.
+
+	cmd := result first statementBlock statements first.
+	self assert: cmd class equals: FASTEsopeSegact.
+
+	self assert: cmd variables size equals: 1.
+	self assert: cmd variables first name equals: 'lb'.
+]
+
 { #category : 'tests' }
 EsopeToFASTTests >> testSegadjCommand [
 	

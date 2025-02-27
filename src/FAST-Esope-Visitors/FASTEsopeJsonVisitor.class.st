@@ -38,9 +38,10 @@ FASTEsopeJsonVisitor >> processEsopeNode: anEsopeCommandNode command: esopeComma
 
 	data := self processEsopeComment: anEsopeCommandNode.
 
-	variables := (data allButFirst: 3) collect: [ :name |
+	variables := (data allButFirst: 3) collect: [ :name | | varName |
+		varName := name copyUpToSubstring: '*'.
 		(self model newScalarVariable)
-			name: name;
+			name: varName;
 			yourself
 		].
 	^(self newEntity: esopeCommandClass atPosition: data second)
