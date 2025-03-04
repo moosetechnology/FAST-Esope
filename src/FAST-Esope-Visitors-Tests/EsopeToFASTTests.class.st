@@ -260,6 +260,29 @@ c@_   end segment
 ]
 
 { #category : 'tests' }
+EsopeToFASTTests >> testSegmentUpperCaseName [
+
+	| result seg |
+	fortranCode := '      subroutine hello
+c@_   segment, FOO
+c@_   end segment
+      end
+'.
+
+	jsonCode := '{"meta":{"miVersion":"fortran77","miFilename":"./srcCode.f"},"program_units":[{"anno":[],"arguments":null,"blocks":[{"anno":[],"comment":"@_   segment, FOO","span":"(2:1)-(2:18)","tag":"comment"},{"anno":[],"comment":"@_   end segment","span":"(3:1)-(3:17)","tag":"comment"}],"name":"hello","options":[null,null],"span":"(1:7)-(4:9)","subprograms":null,"tag":"subroutine"}]}'.
+
+	result := self visitJsonCode.
+
+	self assert: result first declarations size equals: 1.
+	seg := result first declarations anyOne.
+	
+	self assert: seg class equals: FASTEsopeSegment.
+	self assert: seg name equals: 'foo'.
+
+	self assert: seg statements size equals: 0.
+]
+
+{ #category : 'tests' }
 EsopeToFASTTests >> testSegmentWithDeclaration [
 
 	| result seg declaration declarator |

@@ -173,7 +173,7 @@ FASTEsopeJsonVisitor >> visitEsopeSegmentComment: anEsopeCommentNode [
 
 	inSegmentDeclaration := true.
 	segmentDeclarations add: ((self newEntity: FASTEsopeSegment atPosition: data second)
-		name: data fourth ;
+		name: data fourth asLowercase ;
 		yourself).
 	
 	^nil
