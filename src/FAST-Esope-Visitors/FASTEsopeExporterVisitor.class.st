@@ -1,6 +1,8 @@
 Class {
 	#name : 'FASTEsopeExporterVisitor',
 	#superclass : 'FASTFortranExporterVisitor',
+	#traits : 'FASTEsopeTVisitor',
+	#classTraits : 'FASTEsopeTVisitor classTrait',
 	#category : 'FAST-Esope-Visitors-Export',
 	#package : 'FAST-Esope-Visitors',
 	#tag : 'Export'
@@ -37,17 +39,6 @@ FASTEsopeExporterVisitor >> visitFASTEsopePointerDeclarator: aFASTEsopePointerDe
 ]
 
 { #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopePointerStatement: aFASTEsopePointerStatement [
-
-	self
-		sixSpaces ;
-		<< aFASTEsopePointerStatement command ;
-		<< ',' ;
-		<< aFASTEsopePointerStatement pointerVariable ;
-		newLine
-]
-
-{ #category : 'visiting' }
 FASTEsopeExporterVisitor >> visitFASTEsopePointerType: aFASTEsopePointerType [
 
 		self << aFASTEsopePointerType name
@@ -66,36 +57,6 @@ FASTEsopeExporterVisitor >> visitFASTEsopeSeg: aFASTEsopeSegCommand command: com
 ]
 
 { #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegact: aFASTEsopeSegact [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegact command: 'segact'
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegadj: aFASTEsopeSegadj [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegadj command: 'segadj'
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegcop: aFASTEsopeSegcop [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegcop command: 'segcop'
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegdes: aFASTEsopeSegdes [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegdes command: 'segdes'
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegini: aFASTEsopeSegini [ 
-
-	self visitFASTEsopeSeg: aFASTEsopeSegini command: 'segini'
-]
-
-{ #category : 'visiting' }
 FASTEsopeExporterVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 
 	self
@@ -110,22 +71,4 @@ FASTEsopeExporterVisitor >> visitFASTEsopeSegment: aFASTEsopeSegment [
 		sixSpaces ;
 		<< 'end segment' ;
 		newLine
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegmov: aFASTEsopeSegmov [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegmov command: 'segmov'
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegprt: aFASTEsopeSegprt [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegprt command: 'segprt'
-]
-
-{ #category : 'visiting' }
-FASTEsopeExporterVisitor >> visitFASTEsopeSegsup: aFASTEsopeSegsup [
-
-	self visitFASTEsopeSeg: aFASTEsopeSegsup command: 'segsup'
 ]
