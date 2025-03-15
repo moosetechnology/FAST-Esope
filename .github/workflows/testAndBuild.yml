@@ -5,8 +5,6 @@ name: Run tests
 on:
 # Only one trigger is necessary, keep only the ones you need. Default branch is set by default, change it according to your needs.
 # Find more information here: # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
-  push:
-    branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
 
