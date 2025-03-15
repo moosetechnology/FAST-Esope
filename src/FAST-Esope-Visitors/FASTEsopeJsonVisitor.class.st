@@ -4,9 +4,9 @@ Class {
 	#instVars : [
 		'inSegmentDeclaration'
 	],
-	#category : 'FAST-Esope-Visitors-Import',
+	#category : 'FAST-Esope-Visitors-Importer',
 	#package : 'FAST-Esope-Visitors',
-	#tag : 'Import'
+	#tag : 'Importer'
 }
 
 { #category : 'initialization' }
