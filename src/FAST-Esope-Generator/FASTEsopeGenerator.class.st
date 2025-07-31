@@ -20,7 +20,8 @@ Class {
 		'pointerDeclarator',
 		'variableDeclarator',
 		'segCommand',
-		'includeStatement'
+		'includeStatement',
+		'entity'
 	],
 	#category : 'FAST-Esope-Generator',
 	#package : 'FAST-Esope-Generator'
@@ -49,6 +50,8 @@ FASTEsopeGenerator class >> submetamodels [
 FASTEsopeGenerator >> defineClasses [
 
 	super defineClasses.
+
+	entity  := self remoteEntity: #Entity withPrefix: #FASTFortran.
 
 	arrayDimensionExpression := self newClassNamed: #ArrayDimensionExpression comment: 'I represent a slash operator ptr.attr(/1)'.
 	
