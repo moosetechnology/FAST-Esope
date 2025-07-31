@@ -51,7 +51,7 @@ FASTEsopeGenerator >> defineClasses [
 
 	super defineClasses.
 
-	entity  := self remoteEntity: #Entity withPrefix: #FASTFortran.
+	entity  := self newClassNamed: #Entity.
 
 	arrayDimensionExpression := self newClassNamed: #ArrayDimensionExpression comment: 'I represent a slash operator ptr.attr(/1)'.
 	
@@ -85,6 +85,8 @@ FASTEsopeGenerator >> defineClasses [
 
 { #category : 'definition' }
 FASTEsopeGenerator >> defineHierarchy [
+
+	entity --|> #TEntity.
 
 	arrayDimensionExpression --|> binaryExpression.
 

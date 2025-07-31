@@ -1,6 +1,18 @@
+"
+## Properties
+======================
+
+| Name | Type | Default value | Comment |
+|---|
+| `endPos` | `Number` | nil | |
+| `startPos` | `Number` | nil | |
+
+"
 Class {
 	#name : 'FASTEsopeEntity',
 	#superclass : 'MooseEntity',
+	#traits : 'FASTTEntity',
+	#classTraits : 'FASTTEntity classTrait',
 	#category : 'FAST-Esope-Entities-Entities',
 	#package : 'FAST-Esope-Entities',
 	#tag : 'Entities'
