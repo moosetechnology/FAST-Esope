@@ -1,3 +1,8 @@
+"
+WARNING: Regenerating the FASTEsope meta-model breaks FASTFotran
+
+See [https://github.com/moosetechnology/FAST-Esope/issues/27](https://github.com/moosetechnology/FAST-Esope/issues/27)
+"
 Class {
 	#name : 'FASTEsopeGenerator',
 	#superclass : 'FamixMetamodelGenerator',
@@ -48,6 +53,8 @@ FASTEsopeGenerator class >> submetamodels [
 
 { #category : 'definition' }
 FASTEsopeGenerator >> defineClasses [
+
+	self flag: 'regenerating the FASTEsope meta-model breaks the FASTFortran meta-model (see class comment)'.
 
 	super defineClasses.
 
