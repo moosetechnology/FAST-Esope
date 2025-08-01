@@ -20,7 +20,8 @@ Class {
 		'pointerDeclarator',
 		'variableDeclarator',
 		'segCommand',
-		'includeStatement'
+		'includeStatement',
+		'entity'
 	],
 	#category : 'FAST-Esope-Generator',
 	#package : 'FAST-Esope-Generator'
@@ -106,6 +107,7 @@ FASTEsopeGenerator >> defineHierarchy [
 	pointerDeclarationStatement --|> abstractStatement.
 	pointerDeclarationStatement --|> tDeclaration.
 
+	pointerDeclarator --|>#TEntityMetaLevelDependency 
 ]
 
 { #category : 'definition' }
