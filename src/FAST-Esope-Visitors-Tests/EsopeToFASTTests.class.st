@@ -131,6 +131,7 @@ c@_   segact, lb
 
 	cmd := result first statementBlock statements first.
 	self assert: cmd class equals: FASTEsopeSegact.
+	self assert: cmd statementContainer equals: result first statementBlock.
 
 	self assert: cmd variables size equals: 1.
 	self assert: cmd variables first name equals: 'lb'.
@@ -150,6 +151,7 @@ c@_   segact, lb*NOMOD
 
 	cmd := result first statementBlock statements first.
 	self assert: cmd class equals: FASTEsopeSegact.
+	self assert: cmd statementContainer equals: result first statementBlock.
 
 	self assert: cmd variables size equals: 1.
 	self assert: cmd variables first name equals: 'lb'.
@@ -168,6 +170,8 @@ C@_     segadj,pt
 
 	cmd := result first statementBlock statements first.
 	self assert: cmd class equals: FASTEsopeSegadj.	
+	self assert: cmd statementContainer equals: result first statementBlock.
+
 	self assert: cmd variables size equals: 1.
 	self assert: cmd variables first name equals: 'pt'.
 	self assert: cmd startPos equals: 30.
@@ -186,7 +190,9 @@ C@_     segdes,pt
 	result := self visitJsonCode.
 
 	stmt := result first statementBlock statements first.
-	self assert: stmt class equals: FASTEsopeSegdes.		
+	self assert: stmt class equals: FASTEsopeSegdes.
+	self assert: stmt statementContainer equals: result first statementBlock.
+
 	self assert: stmt variables size equals: 1.
 	self assert: stmt variables first name equals: 'pt'.
 	self assert: stmt startPos equals: 30.
@@ -205,7 +211,9 @@ C@_     segini,pt
 	result := self visitJsonCode.
 
 	cmd := result first statementBlock statements first.
-	self assert: cmd class equals: FASTEsopeSegini.		
+	self assert: cmd class equals: FASTEsopeSegini.
+	self assert: cmd statementContainer equals: result first statementBlock.
+
 	self assert: cmd variables size equals: 1.
 	self assert: cmd variables first name equals: 'pt'.
 	self assert: cmd startPos equals: 30.
@@ -229,6 +237,7 @@ c@_   segini, lb1, lb2, lb3
 
 	cmd := result first statementBlock statements first.
 	self assert: cmd class equals: FASTEsopeSegini.
+	self assert: cmd statementContainer equals: result first statementBlock.
 
 	self assert: cmd variables size equals: 3.
 	self assert: cmd variables first name equals: 'lb1'.	
