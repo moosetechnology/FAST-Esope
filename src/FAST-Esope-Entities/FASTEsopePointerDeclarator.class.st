@@ -22,6 +22,8 @@ A declarator for one ""pointeur"" and its segment type in a PointerDeclarationSt
 Class {
 	#name : 'FASTEsopePointerDeclarator',
 	#superclass : 'FASTEsopeEntity',
+	#traits : 'TEntityMetaLevelDependency',
+	#classTraits : 'TEntityMetaLevelDependency classTrait',
 	#instVars : [
 		'#pointedTypeName => FMProperty',
 		'#pointerDeclarationStatement => FMOne type: #FASTEsopePointerDeclarationStatement opposite: #pointerDeclarators'
